@@ -56,11 +56,18 @@ class Game{
                      players[index - 1].y = y;
                        
                      if(index === player.index){
-                        basket.display(player.name);
+                         
+                         fill("black");
+                         textSize(25);
+                         text(allPlayers[plr].name ,x-25,y+25);
+
+                         
                      }
-                    textSize(20);
-                     text("Player1:",100,50);
-                     text("Player2:",100,70);
+                    
+                         textSize(25);
+                         fill("white");
+                         text("Player 1 :" +allPlayers.player1.score,50,50);
+                        text("Player 2 :" + allPlayers.player2.score, 50, 100);
                  
                  }
                 
@@ -97,11 +104,16 @@ class Game{
                  }
                  
                   if (player.index !== null) {
-                    fruitGroup.destroyEach();
-                    database.ref('/').update({
-                    score:score
-                    });
-                }        
+                      for (var i = 0; i < fruitGroup.length; i++) {
+                          if (fruitGroup.get(i).isTouching(players)) {
+                              fruitGroup.get(i).destroy();
+                              player.score =player.score+1;
+                              player.update();
+                              
+                          }
+                          
+                      }
+                  }
                 
 
          
